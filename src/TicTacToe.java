@@ -8,19 +8,19 @@ public class TicTacToe {
 public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
     boolean play = true;
-    int rowMove = 0;
-    int colMove = 0;
-    String player1 = "X";
-    String player2 = "O";
+    int rowMove;
+    int colMove;
+    final String Player1 = "X";
+    final String Player2 = "O";
     String playerTurn = " ";
     do {
         clearBoard();
         for (int x = 1; x <= 9; ++x) {
             display();
             if (x % 2 == 0) {
-                playerTurn = player2;
+                playerTurn = Player2;
             } else {
-                playerTurn = player1;
+                playerTurn = Player1;
             }
             do {
                 rowMove = SafeInput.getRangedInt(in, playerTurn + "'s move. Enter Row: ", 1, 3);
@@ -29,7 +29,7 @@ public static void main(String[] args) {
                 colMove = colMove - 1;
                 isValidMove(rowMove, colMove);
             } while (!isValidMove(rowMove, colMove));
-            if (playerTurn.equals(player1)) {
+            if (playerTurn.equals(Player1)) {
                 board[rowMove][colMove] = " X ";
             } else {
                 board[rowMove][colMove] = " O ";
@@ -51,7 +51,6 @@ public static void main(String[] args) {
         play = SafeInput.getYNConfirm(in, "Play Again? [Y/N]");
         System.out.println();
         if(play){
-            System.out.print("X will now use O and O will now use X");
             System.out.println();
         }
     }while(play);
@@ -78,7 +77,7 @@ public static void main(String[] args) {
         if (board[row][col].equals(" - ")) {
             valmove = true;
         } else{
-            System.out.print("Illegal move. Cannot take already taken spot ");
+            System.out.print("Illegal move. Spot already taken ");
         }
         return valmove;
     }
@@ -112,7 +111,7 @@ public static void main(String[] args) {
         }
         return tie;
     }
-    private static boolean isColumnWin(String player1){
+    private static boolean isColumnWin(String player){
         boolean win= false;
         if(board[0][1].equals(" X ")){
             if(board[1][1].equals(" X ")){
